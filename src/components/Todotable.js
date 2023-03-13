@@ -9,6 +9,7 @@ return (
                         todos.map((todo, index) => 
                         <tr key={index}>
                             <td>{todo.description}</td>
+                            <td>{todo.priority}</td>
                             <td>{todo.date}</td>
                             <td><button onClick={() => deleteTask(index)}>Done</button></td>
                         </tr>)
