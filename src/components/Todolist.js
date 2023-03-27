@@ -1,5 +1,8 @@
 import React, { useState, useRef } from'react';
 import { AgGridReact } from 'ag-grid-react';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
 
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-material.css';
@@ -29,27 +32,46 @@ export default function Todolist() {
 
     return(
         <div>
-            <h1> My todos</h1>
-            <input
-                placeholder='Description'
-                value={list.description}
-                onChange={e => setList({...list, description: e.target.value})}
-            />
+            <Stack 
+                direction='row' 
+                spacing={2} 
+                justifyContent="center"
+                alignItems="center">
 
-            <input
-                placeholder='Priority'
-                value={list.priority}
-                onChange={e => setList({...list, priority: e.target.value})}
-            />
+                <TextField
+                    label='Description'
+                    variant='standard'
+                    value={list.description}
+                    onChange={e => setList({...list, description: e.target.value})}
+                />
 
-            <input
-                type = 'date'
-                placeholder='Date'
-                value={list.date}
-                onChange={e => setList({...list, date: e.target.value})}
-            />
-            <button onClick={addTodo}>Add</button>
-            <button onClick={deleteTask}>Delete</button>
+                <TextField
+                    label='Priority'
+                    variant='standard'
+                    value={list.priority}
+                    onChange={e => setList({...list, priority: e.target.value})}
+                />
+
+                <TextField
+                    label='Date'
+                    variant='standard'
+                    value={list.date}
+                    onChange={e => setList({...list, date: e.target.value})}
+                />
+
+                <Button 
+                    variant="contained" 
+                    onClick={addTodo}>
+                        Add Task
+                </Button>
+                
+                <Button 
+                    variant="contained" 
+                    color="error" 
+                    onClick={deleteTask}>
+                        Delete
+                </Button>
+            </Stack>
 
             <div className='ag-theme-material' style={{height: 600, width: 600, margin: 'auto' }}>
                 <AgGridReact
