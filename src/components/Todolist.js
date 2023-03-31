@@ -24,7 +24,7 @@ export default function Todolist() {
     ]);
 
     const addTodo = () => {
-        setTodos([{...list, date: dayjs(new Date(list.date)).format('DD/MM/YYYY')}, ...todos]); //To have the latest input at first have ...todos after the description
+        setTodos([{...list, date: dayjs(new Date(list.date)).format('DD.MM.YYYY')}, ...todos]); //To have the latest input at first have ...todos after the description
         setList({ description: '', priority: '', date: null});
     }
 
@@ -63,7 +63,6 @@ export default function Todolist() {
                         label='Date'
                         value={list.date}
                         onChange={e => setList({...list, date: e})}
-                        // onChange = (date) => { const ISOdate = date.toISOString(); }
                         /> 
                     </DemoContainer>
                 </LocalizationProvider>
