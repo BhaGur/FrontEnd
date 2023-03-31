@@ -3,12 +3,17 @@ import { AgGridReact } from 'ag-grid-react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
+import dayjs, { Dayjs } from 'dayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-material.css';
 
 export default function Todolist() {
-    const [list, setList] = React.useState({description:'', priority:'' , date: ''});
+    const [list, setList] = React.useState({description:'', priority:'' , date: null});
     const [todos, setTodos] = React.useState([]);
     const gridRef = useRef();
 
@@ -19,8 +24,8 @@ export default function Todolist() {
     ]);
 
     const addTodo = () => {
-        setTodos([...todos, list]); //To have the latest input at first have ...todos after the description
-        setList({ description: '', priority: '', date: ''});
+        setTodos([{...list, date: dayjs(new Date(list.date)).format('DD/MM/YYYY')}, ...todos]); //To have the latest input at first have ...todos after the description
+        setList({ description: '', priority: '', date: null});
     }
 
     const deleteTask = () => { 
@@ -52,12 +57,16 @@ export default function Todolist() {
                     onChange={e => setList({...list, priority: e.target.value})}
                 />
 
-                <TextField
-                    label='Date'
-                    variant='standard'
-                    value={list.date}
-                    onChange={e => setList({...list, date: e.target.value})}
-                />
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DemoContainer components={['DatePicker']}>
+                       <DatePicker
+                        label='Date'
+                        value={list.date}
+                        onChange={e => setList({...list, date: e})}
+                        // onChange = (date) => { const ISOdate = date.toISOString(); }
+                        /> 
+                    </DemoContainer>
+                </LocalizationProvider>
 
                 <Button 
                     variant="contained" 
