@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { DemoContainer } from '@mui/x-date-pickers/internals';
 
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-material.css';
